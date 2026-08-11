@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinithasree Subbhuraam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f2efe6;
+    --paper-deep:#ece7d9;
+    --ink:#1c2530;
+    --ink-soft:#4a4638;
+    --rule:#c6bda4;
+    --oxblood:#7a2e33;
+    --teal:#2b6663;
+    --muted:#726c5e;
+    --max:1100px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Sans 3', sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--oxblood); color:var(--paper);}
+
+  a{color:inherit;}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--oxblood);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--rule);
+  }
+
+  h1,h2,h3{font-family:'Newsreader', serif; font-weight:500; margin:0;}
+
+  /* ---------- Masthead ---------- */
+  header.masthead{
+    padding:26px 0 0;
+    background:var(--paper);
+    position:sticky;
+    top:0;
+    z-index:50;
+    border-bottom:1px solid var(--rule);
+  }
+  .masthead-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:12px;
+    padding-bottom:14px;
+  }
+  .wordmark{
+    font-family:'Newsreader', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(24px, 3.4vw, 34px);
+    letter-spacing:0.01em;
+  }
+  .masthead-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .rule-double{
+    height:5px;
+    background:
+      linear-gradient(var(--ink), var(--ink)) top / 100% 1px no-repeat,
+      linear-gradient(var(--ink), var(--ink)) bottom / 100% 2px no-repeat;
+    margin:0 32px;
+  }
+  nav.mastnav{
+    max-width:var(--max);
+    margin:0 auto;
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    padding:12px 32px 14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+  nav.mastnav a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    position:relative;
+    padding-bottom:3px;
+  }
+  nav.mastnav a::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width:0; height:1px;
+    background:var(--oxblood);
+    transition:width .25s ease;
+  }
+  nav.mastnav a:hover::after{width:100%;}
+  nav.mastnav a:hover{color:var(--oxblood);}
+
+  .byline{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--muted);
+    padding:14px 0 18px;
+    line-height:1.7;
+  }
+  .byline b{color:var(--ink-soft); font-weight:500;}
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- Hero / About ---------- */
+  section{padding:64px 0;}
+  .hero{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:56px;
+    align-items:start;
+    padding-top:56px;
+  }
+  .portrait-frame{
+    border:1px solid var(--ink);
+    padding:10px;
+  }
+  .portrait-frame img{
+    display:block;
+    width:100%;
+    height:auto;
+    filter:grayscale(38%) contrast(1.05);
+  }
+  .portrait-cap{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.05em;
+    color:var(--muted);
+    padding-top:8px;
+    text-align:center;
+  }
+  .hero-body h2.lede{
+    font-size:clamp(26px, 3.2vw, 36px);
+    font-weight:500;
+    line-height:1.25;
+    margin:14px 0 20px;
+  }
+  .hero-body p{color:var(--ink-soft); margin:0 0 14px; max-width:62ch;}
+  .hero-body em{font-style:italic; color:var(--oxblood);}
+
+  /* ---------- Stat strip ---------- */
+  .stats{
+    border-top:1px solid var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding:18px 0;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 34px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .stat{display:flex; align-items:baseline; gap:8px;}
+  .stat .n{font-family:'Newsreader', serif; font-style:italic; font-size:26px; color:var(--oxblood);}
+  .stat .l{font-size:12px; letter-spacing:0.04em; color:var(--muted); text-transform:uppercase;}
+
+  /* ---------- Notes ---------- */
+  .notes-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:0;
+    margin-top:28px;
+    border-top:1px solid var(--rule);
+    border-left:1px solid var(--rule);
+  }
+  .note-card{
+    border-right:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    padding:22px;
+    text-decoration:none;
+    color:inherit;
+    display:block;
+    transition:background .2s ease;
+  }
+  .note-card:hover{background:var(--paper-deep);}
+  .note-card img{
+    width:100%; height:150px; object-fit:cover;
+    filter:grayscale(55%);
+    margin-bottom:14px;
+  }
+  .note-card h3{font-size:19px; line-height:1.3; margin-bottom:8px;}
+  .note-card p{font-size:14.5px; color:var(--ink-soft); margin:0 0 10px;}
+  .note-card .go{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--teal);
+  }
+
+  /* ---------- Publications ---------- */
+  .pub-list{margin-top:28px;}
+  .pub{
+    display:grid;
+    grid-template-columns:56px 1fr;
+    gap:20px;
+    padding:26px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .pub:first-child{border-top:1px solid var(--rule);}
+  .pub-num{
+    font-family:'Newsreader', serif;
+    font-style:italic;
+    font-size:28px;
+    color:var(--rule);
+  }
+  .pub h3{font-size:20px; margin-bottom:8px; line-height:1.35;}
+  .pub p{color:var(--ink-soft); font-size:15px; margin:0 0 10px; max-width:68ch;}
+  .pub a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    text-decoration:none;
+    color:var(--teal);
+    border-bottom:1px solid transparent;
+  }
+  .pub a:hover{border-bottom-color:var(--teal);}
+
+  /* ---------- Books ---------- */
+  .shelf{
+    margin-top:32px;
+    display:flex;
+    gap:44px;
+    align-items:flex-end;
+    padding-bottom:16px;
+    border-bottom:3px solid var(--ink);
+  }
+  .book{
+    width:150px;
+    text-align:center;
+  }
+  .book img{
+    width:100%;
+    box-shadow:-6px 8px 0 var(--paper-deep), 0 10px 20px rgba(28,37,48,0.18);
+    transition:transform .3s ease;
+  }
+  .book:nth-child(2) img{transform:rotate(-1.5deg);}
+  .book:nth-child(1) img{transform:rotate(1.2deg);}
+  .book:hover img{transform:translateY(-6px) rotate(0deg);}
+  .book .cap{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--muted);
+    margin-top:14px;
+  }
+
+  /* ---------- Ventures ---------- */
+  .ventures{
+    margin-top:28px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border-top:1px solid var(--ink);
+    border-left:1px solid var(--rule);
+  }
+  .venture{
+    border-right:1px solid var(--rule);
+    border-bottom:1px solid var(--ink);
+    padding:30px 30px 26px;
+  }
+  .venture h3{font-size:22px; margin-bottom:12px;}
+  .venture p{color:var(--ink-soft); font-size:15px; margin:0 0 16px;}
+  .venture .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--oxblood);
+    margin-bottom:10px;
+    display:block;
+  }
+  .courses{list-style:none; margin:0; padding:0;}
+  .courses li{
+    padding:8px 0;
+    border-top:1px solid var(--rule);
+    display:flex;
+    justify-content:space-between;
+    font-size:14.5px;
+  }
+  .courses a{text-decoration:none; color:var(--ink);}
+  .courses a:hover{color:var(--teal);}
+  .courses span{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--muted);}
+
+  /* ---------- Footer / Correspondence ---------- */
+  footer{
+    background:var(--ink);
+    color:var(--paper);
+    padding:56px 0 28px;
+    margin-top:40px;
+  }
+  footer .eyebrow{color:#c98f92;}
+  footer .eyebrow::after{background:#3d4552;}
+  footer h2{
+    font-size:clamp(28px,4vw,42px);
+    font-weight:500;
+    font-style:italic;
+    margin:16px 0 22px;
+    max-width:14ch;
+  }
+  .foot-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:36px;
+  }
+  .foot-links a{
+    text-decoration:none;
+    color:var(--paper);
+    border-bottom:1px solid #3d4552;
+    padding-bottom:3px;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .foot-links a:hover{border-color:var(--paper); color:#c98f92;}
+  .colophon{
+    border-top:1px solid #3d4552;
+    padding-top:20px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:#8a90a0;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr; gap:28px;}
+    .portrait-frame{max-width:220px;}
+    .notes-grid{grid-template-columns:1fr;}
+    .ventures{grid-template-columns:1fr;}
+    .pub{grid-template-columns:36px 1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{transition:none; opacity:1; transform:none;}
+  }
+
+  :focus-visible{outline:2px solid var(--oxblood); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap masthead-top">
+    <div class="wordmark">Vinithasree Subbhuraam</div>
+    <div class="masthead-tag">AI &amp; Digital Health — Research &amp; Practice</div>
+  </div>
+  <div class="rule-double"></div>
+  <nav class="mastnav">
+    <a href="#about">About</a>
+    <a href="#notes">Field Notes</a>
+    <a href="#research">Research</a>
+    <a href="#books">Books</a>
+    <a href="#ventures">Founder Of</a>
+    <a href="#contact">Correspondence</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <div class="byline reveal">
+    <b>Subbhuraam, V.</b> — Founder, AI First Innovations &amp; IMPACT Labs Academy. Associate Editor, <i>Computer Methods and Programs in Biomedicine</i>. Ranked among the top 1% of computer science researchers worldwide, Research.com (2025).
+  </div>
+
+  <section class="hero reveal" id="about">
+    <div>
+      <div class="portrait-frame">
+        <img src="images/portrait.jpg" alt="Portrait of Dr. Vinithasree Subbhuraam">
+      </div>
+      <div class="portrait-cap">Dr. Vinithasree Subbhuraam</div>
+    </div>
+    <div class="hero-body">
+      <span class="eyebrow">Abstract</span>
+      <h2 class="lede">Twenty years turning complex health and technology problems into solutions that ship.</h2>
+      <p>Dr. Vinithasree Subbhuraam is a visionary leader in AI and digital transformation, with over twenty years of experience delivering high-impact AI/ML solutions and driving measurable business growth across technology sectors. She leads go-to-market strategy and forges partnerships with Fortune 500 companies and innovation hubs.</p>
+      <p>She is currently Founder of <em>AI First Innovations</em>, a consultancy translating complex real-world challenges into revenue-generating solutions using Generative and Agentic AI — and Founder of <em>IMPACT Labs Academy</em>, an EdTech venture teaching the next generation AI, critical thinking, and a sense of purpose.</p>
+      <p>She has published over 100 peer-reviewed journal articles and two books on disruptive solutions for global healthcare, and serves as Associate Editor for <em>Computer Methods and Programs in Biomedicine</em>.</p>
+    </div>
+  </section>
+
+  <div class="stats reveal">
+    <div class="stat"><span class="n">20+</span><span class="l">Years in AI/ML</span></div>
+    <div class="stat"><span class="n">100+</span><span class="l">Peer-reviewed articles</span></div>
+    <div class="stat"><span class="n">2</span><span class="l">Books published</span></div>
+    <div class="stat"><span class="n">Top 1%</span><span class="l">Global CS researchers, 2025</span></div>
+  </div>
+
+  <section id="notes">
+    <span class="eyebrow reveal">Field Notes</span>
+    <div class="notes-grid reveal">
+      <a class="note-card" href="https://vinithasubbhuraam.wordpress.com/2025/01/13/social-consequences-of-ai-powered-technology/" target="_blank" rel="noopener">
+        <img src="images/note-code-dependent.jpg" alt="">
+        <h3>Social consequences of AI-powered technology</h3>
+        <p>Reflections on "Code Dependent," and what widescale AI adoption in health tech means for the people it touches.</p>
+        <span class="go">Read note →</span>
+      </a>
+      <a class="note-card" href="https://vinithasubbhuraam.wordpress.com/2025/01/08/ces-2025-interesting-products/" target="_blank" rel="noopener">
+        <img src="images/note-ces2025.png" alt="">
+        <h3>CES 2025 — Interesting Products</h3>
+        <p>A field scout's notes on the AI-powered health devices worth watching from this year's show floor.</p>
+        <span class="go">Read note →</span>
+      </a>
+      <a class="note-card" href="https://vinithasubbhuraam.wordpress.com/2024/11/13/a-note-from-your-heart-and-brain/" target="_blank" rel="noopener">
+        <img src="images/note-heart-brain.png" alt="">
+        <h3>A note from your heart and brain</h3>
+        <p>What new AHA Circulation research reveals about the wiring between cognition and cardiac health.</p>
+        <span class="go">Read note →</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="research">
+    <span class="eyebrow reveal">Selected Publications</span>
+    <div class="pub-list reveal">
+      <div class="pub">
+        <div class="pub-num">01</div>
+        <div>
+          <h3>Automated risk prediction of post-stroke adverse mental outcomes using deep learning</h3>
+          <p>Deep learning applied to sequential clinical data predicts adverse psychological outcomes after stroke, enabling earlier intervention by integrating medical and behavioral health data.</p>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/40428136/" target="_blank" rel="noopener">View on PubMed →</a>
+        </div>
+      </div>
+      <div class="pub">
+        <div class="pub-num">02</div>
+        <div>
+          <h3>An introduction to the Cyrcadia Breast Monitor</h3>
+          <p>A non-invasive, non-radiogenic wearable that records thermodynamic metabolic data from breast tissue, offering a new approach to early cancer detection and personalized monitoring.</p>
+          <a href="https://www.sciencedirect.com/science/article/abs/pii/S0169260720315911?via%3Dihub" target="_blank" rel="noopener">View on ScienceDirect →</a>
+        </div>
+      </div>
+      <div class="pub">
+        <div class="pub-num">03</div>
+        <div>
+          <h3>Nondimensional diabetes indices for accurate diagnosis of diabetic subjects</h3>
+          <p>Indices derived from modeling the glucose-insulin regulatory system distinguish normal, at-risk, and diabetic subjects — extended by CGMDI toward real-time, continuous diagnostics.</p>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/37216717/" target="_blank" rel="noopener">View on PubMed →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="books">
+    <span class="eyebrow reveal">Books</span>
+    <div class="shelf reveal">
+      <div class="book">
+        <img src="images/book1.jpg" alt="Book cover">
+        <div class="cap">On disruptive health solutions</div>
+      </div>
+      <div class="book">
+        <img src="images/book2.jpg" alt="Book cover">
+        <div class="cap">On the next big ideas in health tech</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ventures">
+    <span class="eyebrow reveal">Founder Of</span>
+    <div class="ventures reveal">
+      <div class="venture">
+        <span class="tag">Consultancy</span>
+        <h3>AI First Innovations</h3>
+        <p>Translates complex real-world challenges into innovative, revenue-generating solutions — leveraging Generative and Agentic AI to solve pressing business problems.</p>
+      </div>
+      <div class="venture">
+        <span class="tag">EdTech</span>
+        <h3>IMPACT Labs Academy</h3>
+        <p>Empowers the next generation with AI skills, critical thinking, and a sense of purpose through a learner-centered model built for the age of AI.</p>
+        <ul class="courses">
+          <li><a href="https://impactlabsacademy.com/innovatex-program/" target="_blank" rel="noopener">InnovateX Program</a> <span>Course</span></li>
+          <li><a href="https://impactlabsacademy.com/scholarx-program/" target="_blank" rel="noopener">ScholarX Program</a> <span>Course</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Correspondence</span>
+    <h2>Let's talk research, ventures, or the next big idea.</h2>
+    <div class="foot-links">
+      <a href="https://www.linkedin.com/in/vinithasree-subbhuraam/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://substack.com/@notesbyvinitha" target="_blank" rel="noopener">Notes by Vinitha ↗</a>
+      <a href="https://impactlabsacademy.com/" target="_blank" rel="noopener">IMPACT Labs Academy ↗</a>
+    </div>
+    <div class="colophon">
+      <span>© 2026 Vinithasree Subbhuraam</span>
+      <span>Founder, AI First Innovations · IMPACT Labs Academy</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
